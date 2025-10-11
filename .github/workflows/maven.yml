@@ -129,12 +129,18 @@ jobs:
     needs: docker_build_and_push
     steps:
     - uses: actions/checkout@v4
-    - name: setup  GCP credentials
+    - name: Setup GCP credentials
       run: |
-        echo "%s" "${{ secrets.GCP_SA_KEY }}" > sa.json
-        gcloud auth activate-service-account --key-file sa.json
-        gcloud config set project ${{vars.GCP_PROJECT_ID}}
+        printf "%s" '${{ secrets.GCP_SA_KEY }}' > sa.json
+        gcloud auth activate-service-account --key-file=sa.json
+        gcloud config set project ${{ vars.GCP_PROJECT_ID }}
         gcloud config set compute/zone us-east1-b
+    # - name: setup  GCP credentials
+    #   run: |
+    #     echo "%s" "${{ secrets.GCP_SA_KEY }}" > sa.json
+    #     gcloud auth activate-service-account --key-file sa.json
+    #     gcloud config set project ${{vars.GCP_PROJECT_ID}}
+    #     gcloud config set compute/zone us-east1-b
 
     - name: get GKE credentials
       run: gcloud container clusters get-credentials bankapp-zonal --zone us-central1-a 
