@@ -131,7 +131,7 @@ jobs:
     - uses: actions/checkout@v4
     - name: setup  GCP credentials
       run: |
-        echo '%s' "${{ secrets.GCP_SA_KEY }}" > sa.json
+        echo "%s" "${{ secrets.GCP_SA_KEY }}" > sa.json
         gcloud auth activate-service-account --key-file sa.json
         gcloud config set project ${{vars.GCP_PROJECT_ID}}
         gcloud config set compute/zone us-east1-b
