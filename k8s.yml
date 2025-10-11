@@ -1,18 +1,18 @@
 ---
 #persistent volume
 
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: mysql-pv
-  namespace: java
-spec:
-  capacity:
-    storage: 1Gi
-  accessModes:
-    - ReadWriteOnce
+# apiVersion: v1
+# kind: PersistentVolume
+# metadata:
+#   name: mysql-pv
+#   namespace: java
+# spec:
+#   capacity:
+#     storage: 1Gi
+#   accessModes:
+#     - ReadWriteOnce
   
----
+# ---
 #persistent volume claim
 apiVersion: v1
 kind: PersistentVolumeClaim
