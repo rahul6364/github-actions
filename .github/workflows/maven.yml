@@ -124,3 +124,23 @@ jobs:
         context: .
         push: true
         tags: rahul6364/bank-app:latest
+  deploy_to_k8s:
+    runs-on: self-hosted
+    needs: docker_build_and_push
+    steps:
+    - uses: actions/checkout@v4
+    - name: setup  GCP credentials
+      run: |
+        echo ${{secrets.GCP_SA_KEY}} >> sa.json
+        gcloud auth activate-service-account --key-file sa.json
+        gcloud config set project ${{vars.GCP_PROJECT_ID}}
+        gcloud config set compute/zone us-east1-b
+
+    - name: get GKR credentials
+      run: gcloud container clusters get-credentials bankapp-zonal --zone us-central1-a 
+    - name: Deploy Kubernetes manifests
+      run: |
+        kubectl create namespace java
+        kubectl apply -f k8s.yml
+    
+      

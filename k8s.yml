@@ -11,9 +11,9 @@ spec:
     storage: 1Gi
   accessModes:
     - ReadWriteOnce
-  hostPath:
-    path: /mnt/data/mysql
+  
 ---
+#persistent volume claim
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -25,6 +25,7 @@ spec:
   resources:
     requests:
       storage: 1Gi
+  storageClassName: standard
 ---
 #mysql deployment
 
@@ -80,6 +81,7 @@ spec:
   ports:
   - port: 3306
     targetPort: 3306
+  type: ClusterIP
 --- 
 #bank-app deployment
 
