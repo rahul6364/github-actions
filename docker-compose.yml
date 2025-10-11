@@ -1,0 +1,38 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: bankapp-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: Test@123
+      MYSQL_DATABASE: bankappdb
+      MYSQL_USER: bankapp
+      MYSQL_PASSWORD: Test@123
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./src/main/resources/static/mysql/SQLScript.txt:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - bankapp-network
+
+  bankapp:
+    build: .
+    container_name: bankapp-spring
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/bankappdb?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: Test@123
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+    ports:
+      - "8081:8081"
+    depends_on:
+      - mysql
+    networks:
+      - bankapp-network
+
+volumes:
+  mysql_data:
+
+networks:
+  bankapp-network:
+    driver: bridge
