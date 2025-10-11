@@ -143,7 +143,7 @@ jobs:
     #     gcloud config set compute/zone us-east1-b
 
     - name: get GKE credentials
-      run: gcloud container clusters get-credentials bankapp-zonal --zone us-central1-a 
+      run: gcloud container clusters get-credentials bankapp-zonal --zone us-east1-b
     - name: Deploy Kubernetes manifests
       run: |
         kubectl create namespace java
