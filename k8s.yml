@@ -116,8 +116,11 @@ spec:
           - name: SERVER_PORT
             value: "8081"
         resources:
+          requests:
+            memory: "512Mi"
+            cpu: "250m"
           limits:
-            memory: "128Mi"
+            memory: "1024Mi"
             cpu: "500m"
         readinessProbe:
           httpGet:
@@ -125,12 +128,14 @@ spec:
             port: 8081
           initialDelaySeconds: 10
           periodSeconds: 5
+          timeoutSeconds: 3
         livenessProbe:
           httpGet:
             path: /
             port: 8081
-          initialDelaySeconds: 30
+          initialDelaySeconds: 60
           periodSeconds: 10
+          timeoutSeconds: 3
 
         ports:
         - containerPort: 8081
