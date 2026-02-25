@@ -12,6 +12,12 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql
       - ./src/main/resources/static/mysql/SQLScript.txt:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-pTest@123"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
     networks:
       - bankapp-network
 
@@ -26,7 +32,8 @@ services:
     ports:
       - "8081:8081"
     depends_on:
-      - mysql
+      mysql:
+        condition: service_healthy
     networks:
       - bankapp-network
 

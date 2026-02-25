@@ -1,5 +1,19 @@
 ## GC Bank – Spring Boot Banking App
 
+## Why I Built This
+
+This project was built to simulate a real-world DevOps workflow for a production-ready Spring Boot application.
+
+Instead of focusing only on writing backend code, I focused on:
+
+- Reproducible environments using Docker
+- Automated validation through CI/CD
+- Security scanning before deployment
+- Code quality enforcement using SonarQube Quality Gates
+- Cloud-native deployment to GKE
+
+The goal was to build a system where no code reaches production without passing automated quality, security, and build checks.
+
 This repository contains a **Spring Boot 3 (Java 17) banking web application** with:
 - **MySQL** as the database
 - **Thymeleaf** UI
@@ -28,6 +42,10 @@ This repository contains a **Spring Boot 3 (Java 17) banking web application** w
 - **Deployment**: GKE (Google Kubernetes Engine) via `k8s.yml`
 
 ---
+
+<p align="center">
+  <img src="images/bank_archi.png" width="800">
+</p>
 
 ## Project Structure (high level)
 

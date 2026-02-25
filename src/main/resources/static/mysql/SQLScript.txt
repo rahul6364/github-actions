@@ -1,1 +1,1 @@
-CREATE DATABASE bankappdb;
+CREATE DATABASE IF NOT EXISTS bankappdb;
